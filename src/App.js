@@ -6,6 +6,10 @@ import Form from './components/form';
 import TodoList from "./components/todolist";
 
 function App() {
+  //run once when the app start
+  useEffect(() => {
+    getLocalTodos();
+  }, []);
   //state stuff
   const [inputText, setInputText] = useState(""); //setting state to get input text
   const [todos, setTodos] = useState([]); //setting state to add todos into an array
@@ -15,6 +19,7 @@ function App() {
   //use effect
   useEffect(() => {
     filterHandler();
+    saveLocalTodos();
   }, [todos, status]);
 
   //functions
@@ -31,6 +36,20 @@ function App() {
           break;
     }
   }
+  //save state todos to local storage
+  const saveLocalTodos = () => {
+      localStorage.setItem('todos', JSON.stringify(todos));
+  };
+  //check if we have anything in state todos if so then get it and push it back to state even after refresh 
+  const getLocalTodos = () => {
+    if(localStorage.getItem('todos') === null){
+      localStorage.setItem('todos', JSON.stringify([]));
+    }
+    else{
+      let todoLocal = JSON.parse(localStorage.getItem('todos'));
+      setTodos(todoLocal);
+    }
+  };
 
   return (
     <div className="App">
