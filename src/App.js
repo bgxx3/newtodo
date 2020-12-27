@@ -43,12 +43,13 @@ function App() {
       setTodos={setTodos} 
       inputText={inputText} 
       setInputText={setInputText} 
-      setStatus={setStatus}/> 
+      setStatus={setStatus}
+      filteredTodos={filteredTodos}/> 
       <TodoList 
       todos={todos} 
-      setTodos={setTodos}/>
-
-      
+      setTodos={setTodos}
+      filteredTodos={filteredTodos}
+      />
     </div>
   );
 }
